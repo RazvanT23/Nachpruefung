@@ -1,2 +1,2 @@
-public class Aufgabe2 {
+package PACKAGE_NAME;public class Aufgabe2 {
 }
