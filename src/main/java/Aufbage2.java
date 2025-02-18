@@ -3,10 +3,10 @@ import java.util.*;
 
 class Aufgabe2 {
 
-    private static List<Product> producte = new ArrayList<>();
-    private static List<Charakter> charaktere = new ArrayList<>();
+    private static List<Product> products = new ArrayList<>();
+    private static List<Charakter> charakters = new ArrayList<>();
 
-    //private static List<Charakter> charaktere = new ArrayList<>();
+
     static Scanner scanner = new Scanner(System.in);
 
     public static void main(String[] args) {
@@ -56,18 +56,14 @@ class Aufgabe2 {
         c5.addProd(Producte.get(2)); // Schwert
         c5.addProd(Producte.get(7)); // Explosionskugel
 
-        charaktere.add(c1);
-        charaktere.add(c2);
-        charaktere.add(c3);
-        charaktere.add(c4);
-        charaktere.add(c5);
+
         while (true) {
 
             System.out.println("Alege ce vrei sa faci");
             System.out.println("Product CRUD");
             System.out.println("Charakter CRUD");
             System.out.println("Filter in functie de Dorf");
-            System.out.println("Filter Charakter producte in functie de dorf");
+            System.out.println("Filter Charakter Products in functie de dorf");
             System.out.println("Sorteaza produsele");
 
             int response = Integer.parseInt(scanner.nextLine());
@@ -88,7 +84,7 @@ class Aufgabe2 {
                     showDorfProd();
                     break;
                 case 5:
-                    sortproducte();
+                    sortProducts();
                     break;
                 case 6:
                     System.exit(0);
@@ -101,18 +97,18 @@ class Aufgabe2 {
     }
 
     // Sortiere Producte für einen bestimmten Kunden
-    private static void sortproducte() {
+    private static void sortProducts() {
         System.out.println("Name eingeben:");
         String name = scanner.nextLine();
         System.out.println("Sortiermodus (1 = aufsteigend, 2 = absteigend):");
         int mode = Integer.parseInt(scanner.nextLine());
 
-        for (Charakter Charakter:charaktere) {
+        for (Charakter Charakter:charakters) {
             if (Charakter.getName().equalsIgnoreCase(name)) {
-                List<Product> sortedproducte = new ArrayList<>(Charakter.getProducts());
-                sortedproducte.sort(Comparator.comparing(Product::getPreis));
-                if (mode == 2) Collections.reverse(sortedproducte);
-                sortedproducte.forEach(System.out::println);
+                List<Product> sortedProducts = new ArrayList<>(Charakter.getProducts());
+                sortedProducts.sort(Comparator.comparing(Product::getPreis));
+                if (mode == 2) Collections.reverse(sortedProducts);
+                sortedProducts.forEach(System.out::println);
                 return;
             }
         }
@@ -152,7 +148,7 @@ class Aufgabe2 {
     private static void deleteCharakter2() {
         System.out.println("ID des zu löschenden Charakter:");
         int id = Integer.parseInt(scanner.nextLine());
-        charaktere.removeIf(Charakter -> Charakter.getId() == id);
+        charakters.removeIf(Charakter -> Charakter.getId() == id);
     }
 
 
@@ -177,12 +173,12 @@ class Aufgabe2 {
     }
 
     private static void showAllCharakter() {
-        if (charaktere.isEmpty()) {
+        if (charakters.isEmpty()) {
             System.out.println("Keine Charakter vorhanden");
             return;
         }
         System.out.println("Alle Charakter:");
-        for (Charakter Charakter:charaktere) {
+        for (Charakter Charakter:charakters) {
             System.out.println(Charakter);
         }
     }
@@ -192,7 +188,7 @@ class Aufgabe2 {
         String name = scanner.nextLine();
         boolean found = false;
 
-        for (Charakter Charakter:charaktere) {
+        for (Charakter Charakter:charakters) {
             if (Charakter.getName().equals(name)) {
                 System.out.println("Gefundener Charakter: " + Charakter.getName()+""+ Charakter.getHerkunftsdorf());
                 found = true;
@@ -208,7 +204,7 @@ class Aufgabe2 {
     private static void updateCharakter() {
         System.out.println("ID des zu aktualisierenden Charakter eingeben:");
         int id = Integer.parseInt(scanner.nextLine());
-        for (Charakter Charakter : charaktere) {
+        for (Charakter Charakter : charakters) {
             if (Charakter.getId() == id) {
                 System.out.println("Neuen Namen eingeben:");
                 Charakter.setName(scanner.nextLine());
@@ -232,8 +228,8 @@ class Aufgabe2 {
         // Create Charakter
         Charakter Charakter = new Charakter(id, name, ort);
 
-        // Ask if they want to add producte
-        List<Product> Charakterproducte = new ArrayList<>();
+        // Ask if they want to add products
+        List<Product> CharakterProducts = new ArrayList<>();
         while (true) {
             System.out.println("Do you want to add a product? (yes/no)");
             String response = scanner.nextLine();
@@ -250,14 +246,14 @@ class Aufgabe2 {
 
             // Create product and add to list
             Product product = new Product(productName, price, season);
-            Charakterproducte.add(product);
+            CharakterProducts.add(product);
         }
 
-        // Attach producte to Charakter
-        Charakter.setProducts(Charakterproducte);
-        charaktere.add(Charakter);
+        // Attach products to Charakter
+        Charakter.setProducts(CharakterProducts);
+        charakters.add(Charakter);
 
-        System.out.println("Charakter created successfully with producte!");
+        System.out.println("Charakter created successfully with products!");
     }
 
 
@@ -292,7 +288,7 @@ class Aufgabe2 {
     private static void deleteProduct2() {
         System.out.println("Productname eingeben:");
         String name = scanner.nextLine();
-        producte.removeIf(product -> product.getName().equals(name));
+        products.removeIf(product -> product.getName().equals(name));
     }
     private static void readProd() {
         System.out.println("Wählen Sie eine Option:");
@@ -314,12 +310,12 @@ class Aufgabe2 {
     }
 
     private static void showAllProd() {
-        if (producte.isEmpty()) {
+        if (products.isEmpty()) {
             System.out.println("Keine prod vorhanden");
             return;
         }
         System.out.println("Alle prod:");
-        for (Product product:producte) {
+        for (Product product:products) {
             System.out.println(product);
         }
     }
@@ -329,7 +325,7 @@ class Aufgabe2 {
         String name = scanner.nextLine();
         boolean found = false;
 
-        for (Product product:producte) {
+        for (Product product:products) {
             if (product.getName().equals(name)) {
                 System.out.println("Gefundener Prod: " + product.getName()+" "+product.getHerkinftregion());
                 found = true;
@@ -346,7 +342,7 @@ class Aufgabe2 {
     private static void updateProduct() {
         System.out.println("Productname eingeben:");
         String name = scanner.nextLine();
-        for (Product product : producte) {
+        for (Product product : products) {
             if (product.getName().equals(name)) {
                 System.out.println("Neuen Preis eingeben:");
                 product.setPreis((int) Double.parseDouble(scanner.nextLine()));
@@ -369,7 +365,7 @@ class Aufgabe2 {
         Product product = new Product(name, price, jahreszeit);
         System.out.println("Your prod " + product.getName() + product.getHerkinftregion() + product.getPreis());
 
-        producte.add(product);
+        products.add(product);
     }
 
 
@@ -378,14 +374,14 @@ class Aufgabe2 {
         String dorf = scanner.nextLine();
         List<Charakter> filteredCharakter = new ArrayList<>();
 
-        for (Charakter charakter:charaktere) {
+        for (Charakter charakter:charakters) {
             if (charakter.getHerkunftsdorf().equals(dorf)) {
                 filteredCharakter.add(charakter);
             }
         }
 
         System.out.println("Charakter " + dorf + ":");
-        for (Charakter charakter:charaktere) {
+        for (Charakter charakter:charakters) {
             System.out.println(charakter.getName());
         }
     }
@@ -394,22 +390,22 @@ class Aufgabe2 {
         System.out.println("Enter ort");
         String jahreszeit = scanner.nextLine();
 
-        List<Charakter> customersWithSeasonalproducte = new ArrayList<>();
+        List<Charakter> customersWithSeasonalProducts = new ArrayList<>();
 
-        for (Charakter charakter : charaktere) {
+        for (Charakter charakter : charakters) {
             for (Product product : charakter.getProducts()) {
                 if (product.getHerkinftregion().equalsIgnoreCase(jahreszeit)) {
-                    customersWithSeasonalproducte.add(charakter);
-                    break; // No need to check more producte for this customer
+                    customersWithSeasonalProducts.add(charakter);
+                    break; // No need to check more products for this customer
                 }
             }
         }
 
-        if (customersWithSeasonalproducte.isEmpty()) {
+        if (customersWithSeasonalProducts.isEmpty()) {
             System.out.println("No customers found for this season.");
         } else {
-            System.out.println("Customers who bought producte in " + jahreszeit + ":");
-            customersWithSeasonalproducte.forEach(System.out::println);
+            System.out.println("Customers who bought products in " + jahreszeit + ":");
+            customersWithSeasonalProducts.forEach(System.out::println);
         }
     }
 
