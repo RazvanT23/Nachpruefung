@@ -7,7 +7,7 @@ import java.util.stream.Collectors;
 
 public class Aufgabe1 {
     private static final String TSV_FILE = "C:\\Users\\Legion\\Desktop\\MAP2\\untitled1\\src\\main\\java\\spielorte.tsv";
-    private static final String OUTPUT_FILE = "C:\\Users\\Legion\\Desktop\\MAP2\\Nachprufung\\src\\main\\java\\output.txt";
+    private static final String OUTPUT_FILE = "C:\\Users\\Legion\\Desktop\\MAP2\\Nachprufung\\src\\main\\java\\gesamtzahl.txt";
     private static final String XML_FILE = "C:\\Users\\Legion\\Desktop\\MAP2\\Nachprufung\\src\\main\\ninja_events.xml";
 
     private static final String JSON_FILE = "C:\\Users\\Legion\\Desktop\\MAP2\\untitled1\\src\\main\\java\\spielorte.json";
